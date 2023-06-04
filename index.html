@@ -548,7 +548,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-04 15:50:30" itemprop="dateModified" datetime="2023-06-04T15:50:30+08:00">2023-06-04</time>
+      <time title="修改时间：2023-06-04 15:58:18" itemprop="dateModified" datetime="2023-06-04T15:58:18+08:00">2023-06-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -573,114 +573,14 @@
           <h3 id="1-OCaml安装（win10）"><a href="#1-OCaml安装（win10）" class="headerlink" title="1 OCaml安装（win10）"></a>1 OCaml安装（win10）</h3><p>这里我只推荐安装虚拟机Ubuntu，都是血泪史，为了搞这个环境我废了两天:sob:。</p>
 <p>如果你不想看我的吐槽小作文，可以直接跳到Ubuntu</p>
 <p><strong>注意：建议别搜索教程(我的除外:yum:)，先看官方文档：<a target="_blank" rel="noopener" href="https://www.ocaml.org/docs/up-and-running">Get Up and Running With OCaml · OCaml Tutorials</a></strong></p>
-<h4 id="1-1-Windows"><a href="#1-1-Windows" class="headerlink" title="1.1 Windows"></a>1.1 Windows</h4><p>当你百度<code>ocaml安装</code>时，你会将那仅有的几篇博客当作你的救星。如果此时你觉得只要跟着作者思路，ocaml安装只是洒洒水而已，恭喜你，又一个大怨种出世了。</p>
-<p>我们先不说ocaml对windows版本支持的情况如何，也不说你会不会WSL2以及相应的工具，就单单就是这图像下载器就会明白青春的可贵。</p>
-<p><img src="/blog/images/OCaml%E5%88%9D%E8%AF%86/image-20230519154156905.png" alt="image-20230519154156905"></p>
-<p>重复的安装，重复的失败。6个小时，但最后我选择了放弃。</p>
-<h5 id="1-1-1-WSL2-VScode"><a href="#1-1-1-WSL2-VScode" class="headerlink" title="1.1.1  WSL2+VScode"></a>1.1.1  WSL2+VScode</h5><p>在官方文档<a target="_blank" rel="noopener" href="https://www.ocaml.org/docs/ocaml-on-windows">OCaml on Windows · OCaml Tutorials</a> 中，明确提到</p>
-<blockquote>
-<ul>
-<li><strong>Only to run, not develop, applications</strong>, use <a target="_blank" rel="noopener" href="https://www.ocaml.org/docs/ocaml-on-windows#docker-images">Docker</a> or <a target="_blank" rel="noopener" href="https://www.ocaml.org/docs/ocaml-on-windows#wsl2">WSL2</a></li>
-</ul>
-</blockquote>
-<p>如果仅仅是运行，可以使用wsl2。wsl2安装：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/install">安装 WSL | Microsoft Learn</a> </p>
-<p>但我觉得最简单的方式还是从Microsoft Store中搜索wsl直接安装，从结果看即是这种<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/install-manual">旧版 WSL 的手动安装步骤 | Microsoft Learn</a>。</p>
-<h5 id="1-1-2-Cygwin"><a href="#1-1-2-Cygwin" class="headerlink" title="1.1.2 Cygwin"></a>1.1.2 Cygwin</h5><p>这是我所在的课题组主流使用的方式，优势方面我还不是很清楚，都是linux，安装相对应的包</p>
-<p><a target="_blank" rel="noopener" href="https://cygwin.com/index.html">Cygwin</a></p>
-<p><img src="/blog/images/OCaml/image-20230522215152491.png" alt="image-20230522215152491"></p>
-</br>
-
-<h4 id="1-2-CentOS"><a href="#1-2-CentOS" class="headerlink" title="1.2 CentOS"></a>1.2 CentOS</h4><p>如果windows版本的安装过程提醒了我要<strong>挑软柿子捏</strong>，那么CentOS版本则教会了我<strong>一定得先看官方文档</strong>:sob:</p>
-<p><strong>注意：CentOS版官方没有提供相关包，这只是吐槽篇，因此可以直接跳过</strong></p>
-<ol>
-<li>安装虚拟机VMware ：<a target="_blank" rel="noopener" href="https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html">下载 VMware Workstation Pro | CN</a> 【记得搜个码白嫖哦】</li>
-</ol>
-<p><img src="/blog/images/OCaml%E5%88%9D%E8%AF%86/image-20230519155022482.png" alt="image-20230519155022482"></p>
-<ol start="2">
-<li>下载CentOS镜像：<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/centos/7/isos/x86_64/">CentOS镜像| 清华大学开源软件镜像站 |</a></li>
-<li>创建一个虚拟机并安装：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GE411c7T2/?spm_id_from=333.1007.top_right_bar_window_default_collection.content.click&vd_source=e6ae873ea2bd8a84255adeaaeb2a9879">VMware虚拟机之Linux虚拟机安装_哔哩哔哩_bilibili</a></li>
-<li>更新yum源</li>
-</ol>
-<p><img src="/blog/images/OCaml%E5%88%9D%E8%AF%86/image-20230519120146856.png" alt="image-20230519120146856"></p>
-<p><img src="/blog/images/OCaml%E5%88%9D%E8%AF%86/image-20230519120306108.png" alt="image-20230519120306108"></p>
-<p>当你完成了上面的所有，恭喜你，白费功夫，因为官网说了，没有包！</p>
-<p>痛，太痛了。。。</p>
-<p><img src="/blog/images/OCaml/image-20230519160059551.png" alt="image-20230519160059551"></p>
-<p><img src="/blog/images/OCaml%E5%88%9D%E8%AF%86/image-20230519120351677.png" alt="image-20230519120351677"></p>
-<p><img src="/blog/images/OCaml%E5%88%9D%E8%AF%86/image-20230519120427199.png" alt="image-20230519120427199"></p>
-</br>
-
-<h4 id="1-3-Ubuntu"><a href="#1-3-Ubuntu" class="headerlink" title="1.3 Ubuntu"></a>1.3 Ubuntu</h4><p>使用VMware创建虚拟机并安装Ubuntu镜像（中间记得选Ubuntu 64-bit），然后根据上面的文档来做，</p>
-<p>Ubuntu镜像：<a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu-releases/20.04/">ubuntu-releases-20.04安装包下载_开源镜像站-阿里云 (aliyun.com)</a></p>
-<p>终端执行如下指令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo apt-get install opam <span class="comment"># 安装ocaml包管理器</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">opam init   <span class="comment"># 初始化</span></span>     </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">eval</span> $(opam <span class="built_in">env</span>) <span class="comment"># 更新ocaml环境</span></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">opam switch create 4.14.0 <span class="comment">#更换版本</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">eval</span> $(opam <span class="built_in">env</span>)</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ocaml -version <span class="comment">#检查版本号</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>注意</strong>：</p>
-<p>或者跟着一位前辈一步一步来<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1sY4y1t7gd/?spm_id_from=333.1007.top_right_bar_window_default_collection.content.click">01-Ocaml环境搭建_哔哩哔哩_bilibili</a></p>
-<ol>
-<li>中间前辈插入了启动脚本，命令应该为<code>vim ~/.bashrc</code></li>
-<li>版本更换命令如上</li>
-</ol>
-</br>
-
-<h3 id="2-OCaml初始"><a href="#2-OCaml初始" class="headerlink" title="2 OCaml初始"></a>2 OCaml初始</h3><h4 id="2-1-编程范式对比"><a href="#2-1-编程范式对比" class="headerlink" title="2.1 编程范式对比"></a>2.1 编程范式对比</h4><table>
-<thead>
-<tr>
-<th></th>
-<th>过程式</th>
-<th>函数式</th>
-<th>面向对象</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>直观表现</td>
-<td>语句的连续执行</td>
-<td>各种函数的组合，定义函数，调用函数</td>
-<td>对象之间交互</td>
-</tr>
-<tr>
-<td>关键词</td>
-<td>状态改变</td>
-<td>纯函数概念</td>
-<td>封装、继承、多态</td>
-</tr>
-<tr>
-<td>重复方式</td>
-<td>循环</td>
-<td>递归</td>
-<td>循环</td>
-</tr>
-</tbody></table>
-<p>纯函数：只做输入输出的改变，不做副改变</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">f</span> <span class="params">(<span class="type">int</span> a)</span> &#123;<span class="keyword">return</span> a+<span class="number">1</span>;&#125; # 纯函数</span><br><span class="line"><span class="type">int</span> <span class="title function_">g</span> <span class="params">(<span class="type">int</span> a)</span> &#123;<span class="type">int</span> b=a; <span class="keyword">return</span> a;&#125;   </span><br></pre></td></tr></table></figure>
-
-<h4 id="2-2-特点"><a href="#2-2-特点" class="headerlink" title="2.2 特点"></a>2.2 特点</h4><blockquote>
-<ol>
-<li><p>多范式语言。</p>
-</li>
-<li><p>自动管理内存。</p>
-</li>
-<li><p>静态类型。 在执行之前检测表达式类型，不正确不执行</p>
-</li>
-<li><p>多态参数。</p>
-</li>
-<li><p>可以自己定义联合类型。user type</p>
-</li>
-<li><p>模块化。</p>
-</li>
-</ol>
-</blockquote>
-<h4 id="2-3-交互特点"><a href="#2-3-交互特点" class="headerlink" title="2.3 交互特点"></a>2.3 交互特点</h4><blockquote>
-<p>命令行对话式交互</p>
-<p>编译器执行时内部主要的过程有：</p>
-<ol>
-<li>读取每一句代码且检查是否有格式错误</li>
-<li>检查是否有类型错误</li>
-<li>执行语句</li>
-<li>显示结果</li>
-</ol>
-</blockquote>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2023/05/18/OCaml%E5%88%9D%E8%AF%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
