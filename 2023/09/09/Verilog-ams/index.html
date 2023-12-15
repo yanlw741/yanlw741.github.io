@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/Horse.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/Horse.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yanlwsometing.gitee.io","root":"/blog/","images":"/blog/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"show_result":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/blog/js/config.js"></script>
+
+    <meta name="description" content="语言概述Verilog-AMS语言是一种高层次的模块化硬件描述语言，它用模块的形式来描述模拟系统及其子系统的结构和行为。Verilog-AMS语言可分为数字电路描述子集Verilog-HDL和模拟电路描述子集Verilog-A。 Verilog-AMS语言对模拟电路的描述可以分成两种类型：行为描述与结构描述。  行为描述是指用一些数学表达式或者传输函数来描述目标电路的行为，其描述范围可以从基本的电">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Verilog-ams">
+<meta property="og:url" content="https://yanlwsometing.gitee.io/blog/2023/09/09/Verilog-ams/index.html">
+<meta property="og:site_name" content="yanlwsometing">
+<meta property="og:description" content="语言概述Verilog-AMS语言是一种高层次的模块化硬件描述语言，它用模块的形式来描述模拟系统及其子系统的结构和行为。Verilog-AMS语言可分为数字电路描述子集Verilog-HDL和模拟电路描述子集Verilog-A。 Verilog-AMS语言对模拟电路的描述可以分成两种类型：行为描述与结构描述。  行为描述是指用一些数学表达式或者传输函数来描述目标电路的行为，其描述范围可以从基本的电">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/Verilog-ams/image-20230910163108734.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/Verilog-ams/image-20230910165831667.png">
+<meta property="article:published_time" content="2023-09-09T08:40:35.000Z">
+<meta property="article:modified_time" content="2023-12-15T09:08:49.284Z">
+<meta property="article:author" content="yanlw">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanlwsometing.gitee.io/images/Verilog-ams/image-20230910163108734.png">
+
+
+<link rel="canonical" href="https://yanlwsometing.gitee.io/blog/2023/09/09/Verilog-ams/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yanlwsometing.gitee.io/blog/2023/09/09/Verilog-ams/","path":"2023/09/09/Verilog-ams/","title":"Verilog-ams"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Verilog-ams | yanlwsometing</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yanlwsometing</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/blog/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">语言概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">运算符与表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E9%98%BB%E5%92%8C%E7%94%B5%E5%AF%BC"><span class="nav-number">4.1.</span> <span class="nav-text">电阻和电导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%AE%B9%E5%92%8C%E7%94%B5%E6%84%9F"><span class="nav-number">4.2.</span> <span class="nav-text">电容和电感</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%8E%8B%E6%BA%90%E5%92%8C%E7%94%B5%E6%B5%81%E6%BA%90"><span class="nav-number">4.3.</span> <span class="nav-text">电压源和电流源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.4.</span> <span class="nav-text">电路模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="yanlw"
+      src="/blog/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">yanlw</p>
+  <div class="site-description" itemprop="description">穷则独善其身，达则兼济天下！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/yanlwsometing" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;yanlwsometing" rel="noopener me" target="_blank"><i class="fab fa-gitee fa-fw"></i>Gitee</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1977712019@qq.com" title="Mail → mailto:1977712019@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yanlwsometing.gitee.io/blog/2023/09/09/Verilog-ams/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.jpg">
+      <meta itemprop="name" content="yanlw">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanlwsometing">
+      <meta itemprop="description" content="穷则独善其身，达则兼济天下！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Verilog-ams | yanlwsometing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Verilog-ams
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-09 16:40:35" itemprop="dateCreated datePublished" datetime="2023-09-09T16:40:35+08:00">2023-09-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-15 17:08:49" itemprop="dateModified" datetime="2023-12-15T17:08:49+08:00">2023-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/Verilog/" itemprop="url" rel="index"><span itemprop="name">Verilog</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="语言概述"><a href="#语言概述" class="headerlink" title="语言概述"></a>语言概述</h2><p>Verilog-AMS语言是一种高层次的模块化硬件描述语言，它用模块的形式来描述模拟系统及其子系统的结构和行为。Verilog-AMS语言可分为数字电路描述子集Verilog-HDL和模拟电路描述子集Verilog-A。</p>
+<p>Verilog-AMS语言对模拟电路的描述可以分成两种类型：行为描述与结构描述。</p>
+<ul>
+<li>行为描述是指用一些数学表达式或者传输函数来描述目标电路的行为，其描述范围可以从基本的电阻、电容到十分复杂的滤波器或其他模拟系统；</li>
+<li>结构描述则是对各个子模块在系统中 的用途以及子模块与子模块之间的连接关系进行描述，这可以理解为是对系统结构框图的描述。完整的结构描述需要包括对信号、端口和基本参数的定义。</li>
+</ul>
+<p><img src="/blog/../../images/Verilog-ams/image-20230910163108734.png" alt="image-20230910163108734">                                </p>
+<p>Verilog-Ams的行为模为模式如下图所示：</p>
+<p><img src="/blog/../../images/Verilog-ams/image-20230910165831667.png" alt="image-20230910165831667"></p>
+<ul>
+<li>Verilog-AMS是由模块构成的，每个模块的内容都镶嵌在<code>module</code>-<code>endmodule</code> 两个语句之间，每个模块实现特定的功能，模块可以进行层次嵌套；</li>
+<li>Verilog-AMS的行为建模，关于模拟电路部分(即<strong>Verilog-A</strong>)使用的是<code>analog</code>关键字，关于数字电路部分(即<strong>Verilog</strong>)则用的是<code>always 和 initial</code>。</li>
+</ul>
+<p><strong>注：没有在Verilog-HDL中出现的新东西，自动认为是属于Verilog-A的部分</strong></p>
+<span id="more"></span>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>Verilog-AMS 支持 Verilog HDL 中的<code>integer</code>、<code>real</code>以及<code>parameter</code> 数据类型。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">integer num = 10; // 单个的整型变量 </span><br><span class="line">integer flag [7:0]; // 8个整数组成的数组 </span><br><span class="line">real pi = 3.1415926; // 单个的实数型变量</span><br><span class="line">parameter real tc = 1.5m from (0:3m);</span><br></pre></td></tr></table></figure>
+
+<p>但是，和 Verilog-HDL 使用<code>parameter</code>类型的中有所不同，<strong>Verilog-AMS拓宽了<code>parameter</code> 类型在模拟电路中的功能</strong>：</p>
+<ul>
+<li>在 Verilog-HDL中，<code>parameter</code> 类型的变量是常数，一旦被定义并分配了初始值，就不能在模拟过程中改变它们的值。</li>
+<li>在Verilog-A中，参数的默认值可以在模拟电路的不同部分或不同阶段中根据需要进行更改，以适应不同的仿真条件或电路行为。定义参数的范围，是为了确保参数的取值在模拟中是合理的，以避免出现不合理的模拟结果或错误。</li>
+</ul>
+<p>在Verilog-AMS中，一个模块如果包含端口，那么必须进行端口说明。端口必须具有一定的类型和方向。Verilog-AMS语句可以描述很多的守恒系统和信号流程系统，例如电磁流体力学和热力学系统等等。因此，在Verilog-AMS模型中，端口也具有多种类型。</p>
+<p>其中，在电学特性中，有电压型<code>voltage</code>、电流型<code>current</code>或者同时具有两种特性<code>electrical</code>。对于常用的<code>electrical</code>类型，需要用到数据类型 <code>discipline</code>。</p>
+<p> <code>discipline</code>类型， 用于定义自定义的仿真控制规则，其使用方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">module my_discipline;</span><br><span class="line">  // 定义一个 discipline 变量</span><br><span class="line">  discipline my_discipline_var &#123;</span><br><span class="line">    real voltage across;</span><br><span class="line">    real current through;</span><br><span class="line">  &#125; my_discipline_instance;</span><br><span class="line">  </span><br><span class="line">  // discipline 方法，用于定义仿真规则</span><br><span class="line">  method void initialize() &#123;</span><br><span class="line">    // 初始化代码</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  method void post_solve() &#123;</span><br><span class="line">    // 后处理代码</span><br><span class="line">  &#125;</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+
+<p><code>discipline</code>类似于面向对象编程的<code>class</code>，用 <code>discipline</code> 关键字来定义一个叫 <code>electrical</code> 的「类」，通过<code>electrical</code>定义的<strong>对象</strong>，在电路中就相对于一个节点。</p>
+<h2 id="运算符与表达式"><a href="#运算符与表达式" class="headerlink" title="运算符与表达式"></a>运算符与表达式</h2><p>Verilog-A支持Verilog中的<strong>常规运算符</strong>，如<code>+ * %  / </code>， 并且优先级一致。</p>
+<p>Verilog-A内置<strong>常规表达式</strong>，用来提供一些数学运算功能，例如<code>sin(x); ln(x); exp(x); pow(x, y)</code>，和模拟电路中常用的物理量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$realtime; // Current simulation time in seconds.</span><br><span class="line">$temperature; // Ambient temperature in kelvin. </span><br><span class="line">$vt Thermal; // voltage (kT/q). </span><br><span class="line">$vt(temp); // Thermal voltage at given temperature.</span><br></pre></td></tr></table></figure>
+
+<p>Verilog-A提供<strong>模拟信号访问函数</strong>，用来访问两个节点间的电压，例如<code>V(x,y)</code>和<code>I(x,y)</code></p>
+<p>为了便于实现模拟电路系统性能与物理实现之间的优化设计，方便定义输入与输出信号之间的数学函数关系，Verilog-AMS提供了多层次的行为和结构模型及多种<strong>行为模块描述函数</strong>：</p>
+<ul>
+<li>时间积分函数idt()</li>
+<li>时间微分函数ddt()</li>
+<li>转换整形函数slew()</li>
+<li>拉普拉斯变换函 数laplace zp()</li>
+<li>延迟函数delay()</li>
+</ul>
+<p>Verilog-A将对模拟信号赋值的运算符称为<strong>模拟运算符</strong>，写作<code>&lt;+</code> ，该运算符只能用在<code>analog begin ... end</code>的行为描述中，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">V(a, b) &lt;+ R * I(a, b); // 赋予节点a和b之间一个电阻特性，阻值为R。（相当于在节点a和b之间定义了一个阻值为R的电阻）</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="电阻和电导"><a href="#电阻和电导" class="headerlink" title="电阻和电导"></a>电阻和电导</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Linear resistor(resistance formulation)</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;disciplines.v&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> resistor(p, n);</span><br><span class="line">	<span class="keyword">parameter</span> <span class="keyword">real</span> r = <span class="number">0</span>; <span class="comment">// resistance(Ohms)</span></span><br><span class="line">	<span class="keyword">inout</span> p, n;</span><br><span class="line">	electrical P, n;</span><br><span class="line">    </span><br><span class="line">	analog <span class="keyword">begin</span></span><br><span class="line">    	V(p, n) &lt;+ r * I(p, n);</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Linear conductor(conductance formulation)</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;disciplines.v&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> conductor(p, n);</span><br><span class="line">	<span class="keyword">parameter</span> <span class="keyword">real</span> g =<span class="number">0</span>； <span class="comment">// conductance(Simens)</span></span><br><span class="line">	<span class="keyword">inout</span> p, n;</span><br><span class="line">	electrical p, n;</span><br><span class="line">    </span><br><span class="line">	analog <span class="keyword">begin</span></span><br><span class="line">        I(p, n) &lt;+ g*V(p, n);</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="电容和电感"><a href="#电容和电感" class="headerlink" title="电容和电感"></a>电容和电感</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Linear capacitor</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;disciplines.v&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> capacitor(p, n)；</span><br><span class="line">	<span class="keyword">parameter</span> <span class="keyword">real</span> c = <span class="number">0</span>; <span class="comment">// capacitance(F)</span></span><br><span class="line">	<span class="keyword">inout</span> p, n;</span><br><span class="line">	electrical p, n;</span><br><span class="line">    </span><br><span class="line">	analog <span class="keyword">begin</span></span><br><span class="line">        I(p, n) &lt;+ c*ddt(V(p，n));</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Linear inductor</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;disciplines.v&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> inductor(p,n);</span><br><span class="line">	<span class="keyword">parameter</span> <span class="keyword">real</span> l = <span class="number">0</span>; <span class="comment">// inductance(H)</span></span><br><span class="line">	<span class="keyword">inout</span> p,n;</span><br><span class="line">	electrical p, n;</span><br><span class="line">	</span><br><span class="line">    analog <span class="keyword">begin</span></span><br><span class="line">        V(p, n) &lt;+ l*ddt(I(p,n));</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="电压源和电流源"><a href="#电压源和电流源" class="headerlink" title="电压源和电流源"></a>电压源和电流源</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DC voltage source</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;disciplines.v&quot;</span></span><br><span class="line"><span class="keyword">module</span> vsro(p,n);</span><br><span class="line">	<span class="keyword">parameter</span> <span class="keyword">real</span> dc=O; <span class="comment">// dc voltage(V)</span></span><br><span class="line">	<span class="keyword">output</span> p,n;</span><br><span class="line">	electrical P，n；</span><br><span class="line">	</span><br><span class="line">    analog <span class="keyword">begin</span></span><br><span class="line">        V(p,n) &lt;+ dc;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// DC current source</span></span><br><span class="line">&#x27;<span class="keyword">include</span> <span class="string">&quot;disciplines.v&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> isrc(p,n);</span><br><span class="line">	<span class="keyword">parameter</span> <span class="keyword">real</span> dc=O; <span class="comment">//de current(A)</span></span><br><span class="line">	<span class="keyword">output</span> p,n;</span><br><span class="line">	electrical p,n;</span><br><span class="line">    </span><br><span class="line">	analog <span class="keyword">begin</span></span><br><span class="line">        I(p,n) &lt;+ dc; </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="电路模型"><a href="#电路模型" class="headerlink" title="电路模型"></a>电路模型</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A simple circuit</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;discipline.v&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;vsrc.valilS&quot;</span></span><br><span class="line"><span class="meta">`<span class="keyword">include</span> &quot;resistor.vams&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> simple_circuit;</span><br><span class="line">	electrical n;</span><br><span class="line">	ground grid;</span><br><span class="line">    vsrc <span class="variable">#(．dc(1)) V1(n，gnd)</span>;</span><br><span class="line">    resistor <span class="variable">#(．r(1k)) R1(n，gad)</span>;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://picture.iczhiku.com/resource/eetop/WyIrtTZjdTWrfMnb.pdf">基于Verilog-AMS的高速DAC高层次模型研究 (iczhiku.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.analog-life.com/2022/04/veriloga-quick-learning/">Verilog-A 语言简单入门教程 – Analog-Life</a></li>
+<li><a target="_blank" rel="noopener" href="https://designers-guide.org/verilog-ams/VlogAMS-2.4.0.pdf">Verilog-AMS Language Reference Manual (designers-guide.org)</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2023/09/09/Verilog-HDL/" rel="prev" title="Verilog-HDL">
+                  <i class="fa fa-chevron-left"></i> Verilog-HDL
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2023/09/15/Ocaml%EF%BC%88%E4%B8%80%EF%BC%89/" rel="next" title="Ocaml（一）">
+                  Ocaml（一） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanlw</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://gitee.com/yanlwsometing" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blog/js/comments.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+  <script src="/blog/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
