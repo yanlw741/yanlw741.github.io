@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/Horse.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/Horse.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yanlwsometing.gitee.io","root":"/blog/","images":"/blog/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"show_result":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/blog/js/config.js"></script>
+
+    <meta name="description" content="TCL概念TCL， 重要的EDA脚本语言，用于控制EDA工 具        使用方法Linux环境下，输入tclsh。Windows系统下，安装active tcl并双击wish.exe 1. 置换TCL解释器运用规则把命令分成一个个独立的单词，同时进行必要的置换。TCL置换分为以下三类：变量置换，命令置换，反斜杠置换 a. 变量置换  b. 命令置换类似于shell的$()   c. 反斜杠置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCL">
+<meta property="og:url" content="https://yanlwsometing.gitee.io/blog/2023/12/16/TCL/index.html">
+<meta property="og:site_name" content="yanlwsometing">
+<meta property="og:description" content="TCL概念TCL， 重要的EDA脚本语言，用于控制EDA工 具        使用方法Linux环境下，输入tclsh。Windows系统下，安装active tcl并双击wish.exe 1. 置换TCL解释器运用规则把命令分成一个个独立的单词，同时进行必要的置换。TCL置换分为以下三类：变量置换，命令置换，反斜杠置换 a. 变量置换  b. 命令置换类似于shell的$()   c. 反斜杠置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216211059697.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216211225159.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216214643135.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216214956391.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216215536562.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216222631550.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216223040672.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216223129771.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216223327955.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216223532631.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216223730799.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216223820673.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216223958148.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216224152793.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216224212214.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216224445929.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216224530316.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216224637528.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216230400054.png">
+<meta property="og:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216230150859.png">
+<meta property="article:published_time" content="2023-12-16T12:51:42.000Z">
+<meta property="article:modified_time" content="2023-12-16T15:04:01.203Z">
+<meta property="article:author" content="yanlw">
+<meta property="article:tag" content="TCL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanlwsometing.gitee.io/images/TCL/image-20231216211059697.png">
+
+
+<link rel="canonical" href="https://yanlwsometing.gitee.io/blog/2023/12/16/TCL/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yanlwsometing.gitee.io/blog/2023/12/16/TCL/","path":"2023/12/16/TCL/","title":"TCL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>TCL | yanlwsometing</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yanlwsometing</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/blog/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TCL"><span class="nav-number">1.</span> <span class="nav-text">TCL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BD%AE%E6%8D%A2"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 置换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E5%8F%98%E9%87%8F%E7%BD%AE%E6%8D%A2"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">a. 变量置换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E5%91%BD%E4%BB%A4%E7%BD%AE%E6%8D%A2"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">b. 命令置换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E5%8F%8D%E6%96%9C%E6%9D%A0%E7%BD%AE%E6%8D%A2"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">c. 反斜杠置换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-%E5%85%B6%E4%BB%96"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">d. 其他</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%BF%90%E7%AE%97"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%8E%A7%E5%88%B6%E6%B5%81"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 控制流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-if"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">a. if</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-foreach"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">b. foreach</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-break"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">c. break</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-continue"><span class="nav-number">1.2.4.4.</span> <span class="nav-text">d. continue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#e-while"><span class="nav-number">1.2.4.5.</span> <span class="nav-text">e. while</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#f-for"><span class="nav-number">1.2.4.6.</span> <span class="nav-text">f. for</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%BF%87%E7%A8%8B%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. 过程函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.6.</span> <span class="nav-text">6. 全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.2.7.</span> <span class="nav-text">7. 正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86"><span class="nav-number">1.2.8.</span> <span class="nav-text">8. 文本处理</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="yanlw"
+      src="/blog/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">yanlw</p>
+  <div class="site-description" itemprop="description">穷则独善其身，达则兼济天下！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/yanlwsometing" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;yanlwsometing" rel="noopener me" target="_blank"><i class="fab fa-gitee fa-fw"></i>Gitee</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1977712019@qq.com" title="Mail → mailto:1977712019@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yanlwsometing.gitee.io/blog/2023/12/16/TCL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.jpg">
+      <meta itemprop="name" content="yanlw">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanlwsometing">
+      <meta itemprop="description" content="穷则独善其身，达则兼济天下！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="TCL | yanlwsometing">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TCL
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-16 20:51:42 / 修改时间：23:04:01" itemprop="dateCreated datePublished" datetime="2023-12-16T20:51:42+08:00">2023-12-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="TCL"><a href="#TCL" class="headerlink" title="TCL"></a>TCL</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>TCL</strong>， 重要的EDA脚本语言，用于控制EDA工 具</p>
+<img src="/../../images/TCL/image-20231216211059697.png" alt="image-20231216211059697" style="zoom: 67%;" />
+
+ <img src="/../../images/TCL/image-20231216211225159.png" alt="image-20231216211225159" style="zoom: 67%;" />
+
+
+
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p><strong>Linux</strong>环境下，输入<code>tclsh</code>。<strong>Windows</strong>系统下，安装active tcl并双击wish.exe</p>
+<h3 id="1-置换"><a href="#1-置换" class="headerlink" title="1. 置换"></a>1. 置换</h3><p>TCL解释器运用规则把命令分成一个个独立的单词，同时进行必要的置换。TCL置换分为以下三类：变量置换，命令置换，反斜杠置换</p>
+<h4 id="a-变量置换"><a href="#a-变量置换" class="headerlink" title="a. 变量置换"></a>a. 变量置换</h4><img src="/../../images/TCL/image-20231216214643135.png" alt="image-20231216214643135" style="zoom: 50%;" />
+
+<h4 id="b-命令置换"><a href="#b-命令置换" class="headerlink" title="b. 命令置换"></a>b. 命令置换</h4><p>类似于shell的<code>$()</code></p>
+<img src="/../../images/TCL/image-20231216214956391.png" alt="image-20231216214956391" style="zoom: 50%;" />
+
+<h4 id="c-反斜杠置换"><a href="#c-反斜杠置换" class="headerlink" title="c. 反斜杠置换"></a>c. 反斜杠置换</h4><p><code>\t </code>表示TAB，<code>\n</code>表示换行符</p>
+<img src="/../../images/TCL/image-20231216215536562.png" alt="image-20231216215536562" style="zoom:67%;" />
+
+<h4 id="d-其他"><a href="#d-其他" class="headerlink" title="d. 其他"></a>d. 其他</h4><ol>
+<li><code>“双引号中会置换$、[]”</code></li>
+<li><code>&#123;花括号里会变成普通字符&#125;</code></li>
+<li><code>#</code> 注释</li>
+</ol>
+<h3 id="2-变量"><a href="#2-变量" class="headerlink" title="2. 变量"></a>2. 变量</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>定义</th>
+<th>取值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>变量</td>
+<td>set 变量名 变量值</td>
+<td>$变量名</td>
+</tr>
+<tr>
+<td>数组</td>
+<td>set 数组名(元素名) 值</td>
+<td>$数组名(元素名)</td>
+</tr>
+<tr>
+<td>列表</td>
+<td>set 列表名{元素1 元素2 元素3……}</td>
+<td>$列表名</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> a <span class="number">2</span>									# <span class="number">2</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$&#123;a&#125;</span>_1								# <span class="number">2</span>_1</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> cell_1(ref_name) <span class="string">&quot;bufx2&quot;</span>			# bufx2</span><br><span class="line"><span class="keyword">set</span> cell_1(full_name) <span class="string">&quot;top/cell_1&quot;</span>		# top/cell_1</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$cell_1</span>(ref_name)					# bufx2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用array指令获取数组信息</span></span><br><span class="line"><span class="keyword">array</span> size cell_1						# <span class="number">2</span></span><br><span class="line"><span class="keyword">array</span> names cell_1						# ref_name full_name</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="/../../images/TCL/image-20231216222631550.png" alt="image-20231216222631550" style="zoom:67%;" />
+
+<h3 id="3-运算"><a href="#3-运算" class="headerlink" title="3. 运算"></a>3. 运算</h3><p><img src="/blog/../../images/TCL/image-20231216223040672.png" alt="image-20231216223040672"></p>
+<h3 id="4-控制流"><a href="#4-控制流" class="headerlink" title="4. 控制流"></a>4. 控制流</h3><h4 id="a-if"><a href="#a-if" class="headerlink" title="a. if"></a>a. if</h4><p><img src="/blog/../../images/TCL/image-20231216223129771.png" alt="image-20231216223129771"></p>
+<h4 id="b-foreach"><a href="#b-foreach" class="headerlink" title="b. foreach"></a>b. foreach</h4><img src="/../../images/TCL/image-20231216223327955.png" alt="image-20231216223327955" style="zoom:67%;" />
+
+<h4 id="c-break"><a href="#c-break" class="headerlink" title="c. break"></a>c. break</h4><h4 id="d-continue"><a href="#d-continue" class="headerlink" title="d. continue"></a>d. continue</h4><h4 id="e-while"><a href="#e-while" class="headerlink" title="e. while"></a>e. while</h4><img src="/../../images/TCL/image-20231216223532631.png" alt="image-20231216223532631" style="zoom:67%;" />
+
+<h4 id="f-for"><a href="#f-for" class="headerlink" title="f. for"></a>f. for</h4><img src="/../../images/TCL/image-20231216223730799.png" alt="image-20231216223730799" style="zoom:67%;" />
+
+
+
+<h3 id="5-过程函数"><a href="#5-过程函数" class="headerlink" title="5. 过程函数"></a>5. 过程函数</h3><img src="/../../images/TCL/image-20231216223820673.png" alt="image-20231216223820673" style="zoom:67%;" />
+
+<h3 id="6-全局变量"><a href="#6-全局变量" class="headerlink" title="6. 全局变量"></a>6. 全局变量</h3><img src="/../../images/TCL/image-20231216223958148.png" alt="image-20231216223958148" style="zoom:67%;" />
+
+<h3 id="7-正则表达式"><a href="#7-正则表达式" class="headerlink" title="7. 正则表达式"></a>7. 正则表达式</h3><img src="/../../images/TCL/image-20231216224152793.png" alt="image-20231216224152793" style="zoom:67%;" />
+
+
+
+<img src="/../../images/TCL/image-20231216224212214.png" alt="image-20231216224212214" style="zoom:67%;" />
+
+<img src="/../../images/TCL/image-20231216224445929.png" alt="image-20231216224445929" style="zoom:67%;" />
+
+<img src="/../../images/TCL/image-20231216224530316.png" alt="image-20231216224530316" style="zoom:67%;" />
+
+<img src="/../../images/TCL/image-20231216224637528.png" alt="image-20231216224637528" style="zoom:67%;" />
+
+
+
+<h3 id="8-文本处理"><a href="#8-文本处理" class="headerlink" title="8. 文本处理"></a>8. 文本处理</h3><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">格式</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">open</td>
+<td align="center">open 文件 打开方式(r&#x2F;w)</td>
+<td align="center">打开文件</td>
+</tr>
+<tr>
+<td align="center">gets</td>
+<td align="center">get fileID 变量名</td>
+<td align="center">gets读fileID标识的文件的下一行，并把该行赋给变量，</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">并返回该行的字符数(文件尾返回-1)</td>
+</tr>
+<tr>
+<td align="center">close·</td>
+<td align="center">close fileID</td>
+<td align="center">关闭文件</td>
+</tr>
+</tbody></table>
+<p><img src="/blog/../../images/TCL/image-20231216230400054.png" alt="image-20231216230400054"><img src="/../../images/TCL/image-20231216230150859.png" alt="image-20231216230150859" style="zoom:67%;" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/TCL/" rel="tag"># TCL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2023/12/12/%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80/" rel="prev" title="电路分析基础">
+                  <i class="fa fa-chevron-left"></i> 电路分析基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2023/12/22/C++/" rel="next" title="C++">
+                  C++ <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanlw</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://gitee.com/yanlwsometing" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/blog/js/comments.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/next-boot.js"></script>
+
+  
+
+
+  <script src="/blog/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
