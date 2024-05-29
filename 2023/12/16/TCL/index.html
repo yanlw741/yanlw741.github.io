@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yanlw741.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"show_result":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="TCL概念TCL， 重要的EDA脚本语言，用于控制EDA工 具        使用方法Linux环境下，输入tclsh。Windows系统下，安装active tcl并双击wish.exe 1. 置换TCL解释器运用规则把命令分成一个个独立的单词，同时进行必要的置换。TCL置换分为以下三类：变量置换，命令置换，反斜杠置换 a. 变量置换  b. 命令置换类似于shell的$()   c. 反斜杠置">
+    <meta name="description" content="TCL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCL">
 <meta property="og:url" content="https://yanlw741.github.io/2023/12/16/TCL/index.html">
 <meta property="og:site_name" content="yanlw741">
-<meta property="og:description" content="TCL概念TCL， 重要的EDA脚本语言，用于控制EDA工 具        使用方法Linux环境下，输入tclsh。Windows系统下，安装active tcl并双击wish.exe 1. 置换TCL解释器运用规则把命令分成一个个独立的单词，同时进行必要的置换。TCL置换分为以下三类：变量置换，命令置换，反斜杠置换 a. 变量置换  b. 命令置换类似于shell的$()   c. 反斜杠置">
+<meta property="og:description" content="TCL">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yanlw741.github.io/images/TCL/image-20231216211059697.png">
 <meta property="og:image" content="https://yanlw741.github.io/images/TCL/image-20231216211225159.png">
@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://yanlw741.github.io/images/TCL/image-20231216230400054.png">
 <meta property="og:image" content="https://yanlw741.github.io/images/TCL/image-20231216230150859.png">
 <meta property="article:published_time" content="2023-12-16T12:51:42.000Z">
-<meta property="article:modified_time" content="2023-12-16T15:04:01.203Z">
+<meta property="article:modified_time" content="2024-05-29T12:40:10.344Z">
 <meta property="article:author" content="yanlw">
 <meta property="article:tag" content="TCL">
 <meta name="twitter:card" content="summary">
@@ -232,9 +232,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-12-16 20:51:42 / 修改时间：23:04:01" itemprop="dateCreated datePublished" datetime="2023-12-16T20:51:42+08:00">2023-12-16</time>
+      <time title="创建时间：2023-12-16 20:51:42" itemprop="dateCreated datePublished" datetime="2023-12-16T20:51:42+08:00">2023-12-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-29 20:40:10" itemprop="dateModified" datetime="2024-05-29T20:40:10+08:00">2024-05-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,7 +268,9 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="TCL"><a href="#TCL" class="headerlink" title="TCL"></a>TCL</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>TCL</strong>， 重要的EDA脚本语言，用于控制EDA工 具</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="TCL"><a href="#TCL" class="headerlink" title="TCL"></a>TCL</h1><span id="more"></span>
+
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><strong>TCL</strong>， 重要的EDA脚本语言，用于控制EDA工 具</p>
 <img src="/../../images/TCL/image-20231216211059697.png" alt="image-20231216211059697" style="zoom: 67%;" />
 
  <img src="/../../images/TCL/image-20231216211225159.png" alt="image-20231216211225159" style="zoom: 67%;" />
@@ -317,8 +325,8 @@
 
 <img src="/../../images/TCL/image-20231216222631550.png" alt="image-20231216222631550" style="zoom:67%;" />
 
-<h3 id="3-运算"><a href="#3-运算" class="headerlink" title="3. 运算"></a>3. 运算</h3><p><img src="/blog/../../images/TCL/image-20231216223040672.png" alt="image-20231216223040672"></p>
-<h3 id="4-控制流"><a href="#4-控制流" class="headerlink" title="4. 控制流"></a>4. 控制流</h3><h4 id="a-if"><a href="#a-if" class="headerlink" title="a. if"></a>a. if</h4><p><img src="/blog/../../images/TCL/image-20231216223129771.png" alt="image-20231216223129771"></p>
+<h3 id="3-运算"><a href="#3-运算" class="headerlink" title="3. 运算"></a>3. 运算</h3><p><img src="/../../images/TCL/image-20231216223040672.png" alt="image-20231216223040672"></p>
+<h3 id="4-控制流"><a href="#4-控制流" class="headerlink" title="4. 控制流"></a>4. 控制流</h3><h4 id="a-if"><a href="#a-if" class="headerlink" title="a. if"></a>a. if</h4><p><img src="/../../images/TCL/image-20231216223129771.png" alt="image-20231216223129771"></p>
 <h4 id="b-foreach"><a href="#b-foreach" class="headerlink" title="b. foreach"></a>b. foreach</h4><img src="/../../images/TCL/image-20231216223327955.png" alt="image-20231216223327955" style="zoom:67%;" />
 
 <h4 id="c-break"><a href="#c-break" class="headerlink" title="c. break"></a>c. break</h4><h4 id="d-continue"><a href="#d-continue" class="headerlink" title="d. continue"></a>d. continue</h4><h4 id="e-while"><a href="#e-while" class="headerlink" title="e. while"></a>e. while</h4><img src="/../../images/TCL/image-20231216223532631.png" alt="image-20231216223532631" style="zoom:67%;" />
@@ -374,7 +382,7 @@
 <td align="center">关闭文件</td>
 </tr>
 </tbody></table>
-<p><img src="/blog/../../images/TCL/image-20231216230400054.png" alt="image-20231216230400054"><img src="/../../images/TCL/image-20231216230150859.png" alt="image-20231216230150859" style="zoom:67%;" /></p>
+<p><img src="/../../images/TCL/image-20231216230400054.png" alt="image-20231216230400054"><img src="/../../images/TCL/image-20231216230150859.png" alt="image-20231216230150859" style="zoom:67%;" /></p>
 
     </div>
 
