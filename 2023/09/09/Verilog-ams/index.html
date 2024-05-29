@@ -23,15 +23,15 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Verilog-ams">
 <meta property="og:url" content="https://yanlw741.github.io/2023/09/09/Verilog-ams/index.html">
-<meta property="og:site_name" content="yanlwsometing">
+<meta property="og:site_name" content="yanlw741">
 <meta property="og:description" content="语言概述Verilog-AMS语言是一种高层次的模块化硬件描述语言，它用模块的形式来描述模拟系统及其子系统的结构和行为。Verilog-AMS语言可分为数字电路描述子集Verilog-HDL和模拟电路描述子集Verilog-A。 Verilog-AMS语言对模拟电路的描述可以分成两种类型：行为描述与结构描述。  行为描述是指用一些数学表达式或者传输函数来描述目标电路的行为，其描述范围可以从基本的电">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yanlw741.github.io/images/Verilog-ams/image-20230910163108734.png">
 <meta property="og:image" content="https://yanlw741.github.io/images/Verilog-ams/image-20230910165831667.png">
 <meta property="article:published_time" content="2023-09-09T08:40:35.000Z">
-<meta property="article:modified_time" content="2023-12-15T09:08:49.284Z">
+<meta property="article:modified_time" content="2024-05-29T12:25:21.637Z">
 <meta property="article:author" content="yanlw">
-<meta property="article:tag" content="博客">
+<meta property="article:tag" content="Verilog-ams">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://yanlw741.github.io/images/Verilog-ams/image-20230910163108734.png">
 
@@ -43,7 +43,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yanlw741.github.io/2023/09/09/Verilog-ams/","path":"2023/09/09/Verilog-ams/","title":"Verilog-ams"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Verilog-ams | yanlwsometing</title>
+<title>Verilog-ams | yanlw741</title>
   
 
 
@@ -76,7 +76,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">yanlwsometing</p>
+      <p class="site-title">yanlw741</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -124,19 +124,19 @@
     <img class="site-author-image" itemprop="image" alt="yanlw"
       src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">yanlw</p>
-  <div class="site-description" itemprop="description">穷则独善其身，达则兼济天下！</div>
+  <div class="site-description" itemprop="description">顶呱呱</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -194,12 +194,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yanlwsometing">
-      <meta itemprop="description" content="穷则独善其身，达则兼济天下！">
+      <meta itemprop="name" content="yanlw741">
+      <meta itemprop="description" content="顶呱呱">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Verilog-ams | yanlwsometing">
+      <meta itemprop="name" content="Verilog-ams | yanlw741">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
@@ -222,7 +222,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-15 17:08:49" itemprop="dateModified" datetime="2023-12-15T17:08:49+08:00">2023-12-15</time>
+      <time title="修改时间：2024-05-29 20:25:21" itemprop="dateModified" datetime="2024-05-29T20:25:21+08:00">2024-05-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -230,7 +230,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Verilog/" itemprop="url" rel="index"><span itemprop="name">Verilog</span></a>
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
         </span>
     </span>
 
@@ -256,9 +256,9 @@
 <li>行为描述是指用一些数学表达式或者传输函数来描述目标电路的行为，其描述范围可以从基本的电阻、电容到十分复杂的滤波器或其他模拟系统；</li>
 <li>结构描述则是对各个子模块在系统中 的用途以及子模块与子模块之间的连接关系进行描述，这可以理解为是对系统结构框图的描述。完整的结构描述需要包括对信号、端口和基本参数的定义。</li>
 </ul>
-<p><img src="/blog/../../images/Verilog-ams/image-20230910163108734.png" alt="image-20230910163108734">                                </p>
+<p><img src="/../../images/Verilog-ams/image-20230910163108734.png" alt="image-20230910163108734">                                </p>
 <p>Verilog-Ams的行为模为模式如下图所示：</p>
-<p><img src="/blog/../../images/Verilog-ams/image-20230910165831667.png" alt="image-20230910165831667"></p>
+<p><img src="/../../images/Verilog-ams/image-20230910165831667.png" alt="image-20230910165831667"></p>
 <ul>
 <li>Verilog-AMS是由模块构成的，每个模块的内容都镶嵌在<code>module</code>-<code>endmodule</code> 两个语句之间，每个模块实现特定的功能，模块可以进行层次嵌套；</li>
 <li>Verilog-AMS的行为建模，关于模拟电路部分(即<strong>Verilog-A</strong>)使用的是<code>analog</code>关键字，关于数字电路部分(即<strong>Verilog</strong>)则用的是<code>always 和 initial</code>。</li>
@@ -329,6 +329,9 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Verilog-ams/" rel="tag"># Verilog-ams</a>
+          </div>
 
         
 

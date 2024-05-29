@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Horse.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Horse.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yanlw741.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"show_result":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="静态时序分析EDA背景概述1. 处理器芯片设计第一步，架构设计。选择指令集ISA（例如RISC-V），将指令集手册定义到功能实例化，形成设计文档 第二步，工程开发。将设计文档开发成RTL级逻辑运算代码（例如Verilog，Chisel ） 第三步，版图设计。用EDA工具将设计好功能等RTL代码物理化成GDS版图 第四步，芯片制造。将设计好的版图通过光刻制造封装形成芯片">
+<meta property="og:type" content="article">
+<meta property="og:title" content="静态时序分析">
+<meta property="og:url" content="https://yanlw741.github.io/2023/10/19/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="yanlw741">
+<meta property="og:description" content="静态时序分析EDA背景概述1. 处理器芯片设计第一步，架构设计。选择指令集ISA（例如RISC-V），将指令集手册定义到功能实例化，形成设计文档 第二步，工程开发。将设计文档开发成RTL级逻辑运算代码（例如Verilog，Chisel ） 第三步，版图设计。用EDA工具将设计好功能等RTL代码物理化成GDS版图 第四步，芯片制造。将设计好的版图通过光刻制造封装形成芯片">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yanlw741.github.io/images/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/image-20231216160134591.png">
+<meta property="og:image" content="https://yanlw741.github.io/images/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/image-20240515221231365.png">
+<meta property="og:image" content="https://yanlw741.github.io/images/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/image-20231216194421397.png">
+<meta property="og:image" content="https://yanlw741.github.io/images/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/image-20231216201145417.png">
+<meta property="article:published_time" content="2023-10-19T07:29:09.000Z">
+<meta property="article:modified_time" content="2024-05-29T12:35:01.473Z">
+<meta property="article:author" content="yanlw">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanlw741.github.io/images/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/image-20231216160134591.png">
+
+
+<link rel="canonical" href="https://yanlw741.github.io/2023/10/19/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yanlw741.github.io/2023/10/19/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/","path":"2023/10/19/静态时序分析/","title":"静态时序分析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>静态时序分析 | yanlw741</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">yanlw741</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">静态时序分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#EDA%E8%83%8C%E6%99%AF%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">EDA背景概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A4%84%E7%90%86%E5%99%A8%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 处理器芯片设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-EDA%E5%B7%A5%E5%85%B7%E9%93%BE%E7%BB%84%E6%88%90"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. EDA工具链组成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">静态时序分析原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-CMOS%E5%8D%95%E5%85%83"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">a. CMOS单元</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-CMOS%E5%8D%95%E5%85%83%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">b. CMOS单元建模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E8%B7%AF%E5%BE%84%E5%BB%B6%E6%97%B6"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">b. 路径延时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-%E5%8D%95%E5%85%83%E5%BB%B6%E6%97%B6"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">c. 单元延时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#d-%E5%BB%BA%E7%AB%8B%E6%97%B6%E9%97%B4%E5%92%8C%E4%BF%9D%E6%8C%81%E6%97%B6%E9%97%B4"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">d. 建立时间和保持时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#e-pin-amp-port"><span class="nav-number">1.2.1.6.</span> <span class="nav-text">e. pin &amp; port</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#f-%E5%B7%A5%E4%BD%9C%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.2.1.7.</span> <span class="nav-text">f.  工作条件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%97%B6%E5%BA%8F%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 时序建模</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-%E7%BB%84%E5%90%88%E5%8D%95%E5%85%83%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">a. 组合单元建模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-%E6%97%B6%E5%BA%8F%E5%8D%95%E5%85%83%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">b. 时序单元建模</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BA%92%E8%BF%9E%E5%AF%84%E7%94%9F%E5%BB%BA%E6%A8%A1"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 互连寄生建模</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="yanlw"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">yanlw</p>
+  <div class="site-description" itemprop="description">顶呱呱</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/yanlwsometing" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;yanlwsometing" rel="noopener me" target="_blank"><i class="fab fa-gitee fa-fw"></i>Gitee</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1977712019@qq.com" title="Mail → mailto:1977712019@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yanlw741.github.io/2023/10/19/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="yanlw">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yanlw741">
+      <meta itemprop="description" content="顶呱呱">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="静态时序分析 | yanlw741">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          静态时序分析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-19 15:29:09" itemprop="dateCreated datePublished" datetime="2023-10-19T15:29:09+08:00">2023-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-29 20:35:01" itemprop="dateModified" datetime="2024-05-29T20:35:01+08:00">2024-05-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">静态时序分析</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="静态时序分析"><a href="#静态时序分析" class="headerlink" title="静态时序分析"></a>静态时序分析</h1><h2 id="EDA背景概述"><a href="#EDA背景概述" class="headerlink" title="EDA背景概述"></a>EDA背景概述</h2><h3 id="1-处理器芯片设计"><a href="#1-处理器芯片设计" class="headerlink" title="1. 处理器芯片设计"></a>1. 处理器芯片设计</h3><p>第一步，架构设计。选择<strong>指令集ISA</strong>（例如RISC-V），将指令集手册定义到功能实例化，形成<strong>设计文档</strong></p>
+<p>第二步，工程开发。将<strong>设计文档</strong>开发成<strong>RTL</strong>级逻辑运算代码（例如Verilog，Chisel ）</p>
+<p>第三步，版图设计。用<strong>EDA工具</strong>将设计好功能等<strong>RTL代码</strong>物理化成<strong>GDS版图</strong></p>
+<p>第四步，芯片制造。将设计好的<strong>版图</strong>通过光刻制造封装形成<strong>芯片</strong></p>
+<p><img src="/images/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/image-20231216160134591.png" alt="image-20231216160134591"></p>
+<span id="more"></span>
+
+<h3 id="2-EDA工具链组成"><a href="#2-EDA工具链组成" class="headerlink" title="2. EDA工具链组成"></a>2. EDA工具链组成</h3><p>由上述可知，EDA的作用是将<strong>RTL代码</strong>物理化成<strong>GDS版图</strong>。下图是<a target="_blank" rel="noopener" href="https://gitee.com/oscc-project/iEDA">iEDA</a>工具链的组成设计，它分为设计环节（图中为绿色模块）和验真环节（图中为橘色模块）。</p>
+<p><strong>逻辑综合（Logic Synthesis）</strong>，是将<strong>RTL代码</strong>描述的<strong>电路行为</strong>转换成可制造的<strong>物理电路</strong>。在图中，表现为结合<strong>器件库（Std Cell Lib）</strong>，输入高层次的<strong>RTL代码（Functional Design）</strong>，产出低层次的<strong>门级电路网表（Net List）</strong>。</p>
+<p>而<strong>逻辑综合（Logic Synthesis）</strong>的前提，是要通过<strong>仿真（Simulation）</strong>模拟电路的行为，验证数字电路的功能、时序和性能，在实际制造之前评估和验证电路的设计（通常产生涉及电路设计的波形图）。其中，<strong>仿真Simulation</strong>使用模型和数学算法来模拟电路行为，<strong>仿真加速Emulation</strong>通过使用硬件来模拟设计。因此通常使用仿真进行早期设计验证和调试，当设计规模变得更大时，可能会转向仿真加速以获得更快的仿真速度。</p>
+<p><strong>物理设计（Physical Design）</strong>，是将<strong>门级电路网表（Net List）</strong>转换为在芯片的<strong>实际布局</strong>。在图中，表现为<strong>规划（Floorplan）</strong>，<strong>布局（Placement ）</strong>，<strong>时序优化（Timing Optimization）</strong>，<strong>时钟树合成（Clock Tree Synthesis）</strong>，<strong>布线（Routing）</strong>。<strong>ECO（Engineering Change Order，工程变更指令）</strong>用于变革设计。</p>
+<p><strong>物理验证（Physical Verification）</strong>，是确保电路在实际制造中能够<strong>满足工艺规则</strong>，并保证设计在芯片上的布局是符合预期的。在图中，包括<strong>设计规则检查（Design Rule Check，DRC）</strong>，<strong>电气规则检查（Electrical Rule Checking）</strong>,<strong>布局与连线规则检查（Layout vs. Schematic，LVS）</strong></p>
+<p><strong>版图处理（Layout processing）</strong>，是为了使制造做得更好。</p>
+<p><img src="/images/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/image-20240515221231365.png" alt="image-20240515221231365"></p>
+<p>将EDA工具链进行简化，又可以反映出数字芯片的设计流程</p>
+<p><img src="/images/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/image-20231216194421397.png" alt="image-20231216194421397"></p>
+<p>由此图可以知道，<strong>STA</strong>是signoff工具（signoff，签发，表示设计已经完成，并且满足了一系列的验证和规范，可以进行下一阶段），它保证每个阶段的时序都是没有问题的。这也决定了STA在芯片设计过程中的<strong>重要地位</strong>。</p>
+<p>对于数字电路设计来说，高工作频率意味着高处理能力。但是数字电路的运行并不能接受无限高的频率，STA分析得出其工作频率的底线，而通过附加约束可以控制逻辑的综合、映射、布局和布线，以减小逻辑和布线延时，从而提高工作频率。</p>
+<h2 id="静态时序分析原理"><a href="#静态时序分析原理" class="headerlink" title="静态时序分析原理"></a>静态时序分析原理</h2><blockquote>
+<p>静态时序分析(STA),可以被定义为：对待分析的电路添加特定的时序约束，套用特定的时序模型，检验系统时序结果是否满足设计者的要求。</p>
+</blockquote>
+<p>静态时序分析技术是一种穷经分析方法，用以衡量电路性能。它提取整个电路所有时序路径，通过计算信号在路径上的时序传播找出违背时序约束的错误，主要是检查建立时间和保持时间是否满足要求，而他们又分别通过对最大路径时延和最小路径时延的分析得到的。</p>
+<p>arrive time &#x3D; </p>
+<p>{	最长路径delay累加值、</p>
+<p>​          最短路径delay累加值、</p>
+<p>​	路径</p>
+<p>}</p>
+<p>slack &#x3D; endpoint时间宽裕值</p>
+<h3 id="1-基础概念"><a href="#1-基础概念" class="headerlink" title="1. 基础概念"></a>1. 基础概念</h3><p>D触发器，在控制信号无效的情况下，跟随时钟信号clk的上升沿触发，输出信号等于输入信号D</p>
+<h4 id="a-CMOS单元"><a href="#a-CMOS单元" class="headerlink" title="a. CMOS单元"></a>a. CMOS单元</h4><p>CMOS逻辑门（Logic Gate）是由NMOS和PMOS晶体管搭建的，其功能是由电容充放电来驱动上拉和下拉结构来实现的。逻辑门本身理想情况下是稳定的，不会从输入和电源吸取电流。[此处可查看MOS的物理特性]</p>
+<p>标准单元（Standard Cell）是通过各种逻辑门串联构成的实现了简单逻辑功能的基本模块。CMOS单元的大部分功耗来自其输入端的充放电。Vdd<del>VIHmin 为 高电平，视为逻辑1，VILmax</del>Vss 为低电平，视为逻辑0</p>
+<p>CMOS单元的输出总电容（total output capacitance）和其输出引脚电容（pin capacitance）是不同的概念。</p>
+<ol>
+<li><strong>输出总电容</strong>：这指的是从CMOS单元的输出端到电源或地的总电容，包括输出端口本身的电容（即输出引脚电容）以及连接到输出端口的内部连线和负载的电容。输出总电容会影响信号的传播速度和波形质量，因为它会增加信号传播的延迟。</li>
+<li><strong>输出引脚电容</strong>：这是指CMOS单元输出端口（如引脚）本身的电容。输出引脚电容会影响信号的上升时间和下降时间，因为它会影响信号在端口上的建立和保持时间。</li>
+</ol>
+<h4 id="b-CMOS单元建模"><a href="#b-CMOS单元建模" class="headerlink" title="b. CMOS单元建模"></a>b. CMOS单元建模</h4><p>总电容反应单元的时序，因此需要通过电容对CMOS建模，来帮助分析单元电容。</p>
+<p>(1)  状态翻转（Switch State）的速度是由<strong>输出线电容的充放电</strong>速度决定的。</p>
+<p>(2)  输出线电容（Output Net）的充放电通过<strong>上拉和下拉结构</strong>实现的</p>
+<p>所以，充放电路径（即上拉或者下拉中的通道）的电阻 决定 CMOS单元速度（即状态翻转速度）</p>
+<p><strong>简单点，CMOS上下拉结构 决定 CMOS单元速度</strong></p>
+<p>由此，上下拉结构越大，<em>其路径缩小导致</em>路径上的电阻越小，单元的输出高or低电平驱动（Output High&#x2F; Low Drive）越大</p>
+<p>（3）最大电容负载（Maximum Capacitive Load）由 <strong>输出驱动</strong> 决定</p>
+<p>（4）最大扇出（Fan-out，可驱动单元数）由 <strong>最大电容负载</strong> 决定</p>
+<p><strong>【不一定对,因为不明白P12上半的公式的含义】</strong></p>
+<p><strong>故，通过单元等效抽象模型（Equivalent abstract model），抽象出单元的时序行为：描述COMS上下拉结构的等效电阻以及负载电容（Cload），得出单元的电平翻转波形</strong></p>
+<p>RC时间常数（RC time Constant）,Rdh * Cload</p>
+<h4 id="b-路径延时"><a href="#b-路径延时" class="headerlink" title="b. 路径延时"></a>b. 路径延时</h4><p>逻辑传播通过逻辑路径的总时间被称为<strong>路径延迟（Path Delay</strong>），包括路径上的单元延时（Cell Delay）和线（Net）的总延迟。</p>
+<p><strong>时序弧（Timing Arc）</strong>，每个单元有多个时序弧，每个时序弧都有时序极性（Timig Sense），包括positive unate、negative unate 和 non-unate。</p>
+<h4 id="c-单元延时"><a href="#c-单元延时" class="headerlink" title="c. 单元延时"></a>c. 单元延时</h4><p>单元延时（Cell delay）在计算时由两个部分：Transition delay 和 Logic gate delay</p>
+<p>（1） Transition delay</p>
+<p>单元 的转换时间，是信号在<strong>2个指定电平</strong>转换所需要的时间，需要设置转换阈值。</p>
+<p>例如，下降沿阈值：<code>slew_upper_threshold_pct_fall</code> <code>slew_lower_threshold_pct_fall</code></p>
+<p>（2）Logic gate delay</p>
+<p>单元的传播延迟，也称为Propagation Delay，是输入端口到输出端口的延迟。</p>
+<p>其通过翻转波形上的一些测量点来定义，需要设置阈值参数。</p>
+<p>例如：输入下降沿阈值点<code>input_threshold_pct_fall</code> 到 输出上升沿阈值点<code>output_threshold_pct_rise</code></p>
+<h4 id="d-建立时间和保持时间"><a href="#d-建立时间和保持时间" class="headerlink" title="d. 建立时间和保持时间"></a>d. 建立时间和保持时间</h4><p><strong>建立时间（Setup Time）</strong>， 采样的D触发器时钟变换前数据必须稳定的时间；<strong>保持时间（Hold Time）</strong>，时钟变换后数据稳定的时间。</p>
+<p>由于触发器无法瞬时完成数据的采样，需要数据在一段时间内保持稳定，即在<code>Setup Time</code> 和<code>Hold Time</code>保持稳定。 </p>
+<p><img src="/images/%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90/image-20231216201145417.png" alt="image-20231216201145417"></p>
+<h4 id="e-pin-amp-port"><a href="#e-pin-amp-port" class="headerlink" title="e. pin &amp; port"></a>e. pin &amp; port</h4><p>port 是端口，有方向；pin 是引脚， 和net连接。</p>
+<h4 id="f-工作条件"><a href="#f-工作条件" class="headerlink" title="f.  工作条件"></a>f.  工作条件</h4><p>STA是在特定的<strong>工作条件（Operating condition）</strong>下进行的，工作条件由PVT（Process，Voltage，Temperature）共同定义。</p>
+<p>不同的制造工艺模型（Manufacturing Process Model）代表不同严苛程度的工作条件。</p>
+<p>Timging Analysis：Fast，Typical，Slow</p>
+<p>Power Analysis：ML，TL</p>
+<p>捕获时钟（Capture Clock）<br>捕获时钟是用于捕获数据的时钟信号。它与发射时钟（launch clock）对应，用于确定信号传输的时间窗口。</p>
+<p>发射时钟（Launch Clock）：触发数据传输的时钟信号。<br>捕获时钟（Capture Clock）：用于捕获数据的时钟信号。<br>在寄存器到寄存器（reg-to-reg）路径中，发射时钟和捕获时钟通常是同一个时钟，但在不同的时钟边缘。时序分析中，检查数据从一个触发沿传输到捕获沿的延迟，以确保数据在时钟周期内正确到达。</p>
+<p>无时钟路径延迟（Unclocked Path Delay）<br>无时钟路径延迟指的是那些不受时钟信号控制的路径延迟。这些路径不涉及任何时钟信号，因此没有特定的时钟触发或捕获数据。</p>
+<p>无时钟路径：数据传输不受任何时钟控制的路径，如组合逻辑中的传输延迟。<br>延迟分析：分析这些路径上的传输延迟，以确保数据传输时间在允许范围内。<br>门控时钟（Gated Clock）<br>门控时钟是指通过逻辑门控制的时钟信号。门控时钟用于节省功耗，通过逻辑门控制时钟信号的开启和关闭。</p>
+<p>门控电路：用于控制时钟信号的开启和关闭的逻辑电路。<br>门控时钟路径：涉及门控时钟的时序路径，需要特别分析以确保时序约束满足。<br>无约束路径（Unconstrained Path）<br>无约束路径指的是那些没有特定时序约束的路径。这些路径没有被明确指定的时序约束控制，因此在时序分析中不会被作为关键路径检查。</p>
+<p>无约束路径：不受时序约束控制的路径。<br>时序分析：这些路径在时序分析中不会被重点检查，但仍然需要确保它们不会引起设计问题。</p>
+<h3 id="2-时序建模"><a href="#2-时序建模" class="headerlink" title="2. 时序建模"></a>2. 时序建模</h3><p>单元时序模型（Cell Timing Model）为单元实例（Instance）提供精准时序信息  。该模型通常由单元的详细电路仿真得出。 </p>
+<p>单元时序弧的延迟是基于2个元素：</p>
+<ol>
+<li>输出负载（Cload），即负载电容越大，延迟越大</li>
+<li>输入转换时间（Transition time）</li>
+</ol>
+<p>又因为输出转换率（Slew，转换时间的倒数）主要取决于输出电容，所以输入的较大转换率可能在输出得到改善。</p>
+<p>表模型NLDM被用来计算延迟（逻辑延迟），输出转换率（转换时间）或者其他时间检查。【但是，此处没有了解到为何横纵坐标要求是：输入转换时间 和 输出引脚的总输出电容 】</p>
+<p>cell_rise 逻辑门或标准单元在输入信号从低电平翻转到高电平（上升沿）时，输出信号从上一个稳态（稳态可以是高电平或低电平）翻转到高电平所需的时间 （若为正单调性，即输入上升阈值 到 输出上升阈值的延迟时间）</p>
+<h4 id="a-组合单元建模"><a href="#a-组合单元建模" class="headerlink" title="a. 组合单元建模"></a>a. 组合单元建模</h4><h4 id="b-时序单元建模"><a href="#b-时序单元建模" class="headerlink" title="b. 时序单元建模"></a>b. 时序单元建模</h4><h3 id="3-互连寄生建模"><a href="#3-互连寄生建模" class="headerlink" title="3. 互连寄生建模"></a>3. 互连寄生建模</h3><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://gitee.com/oscc-project/iEDA">iEDA: 从 Netlist 到 GDS 的开源芯片设计 EDA 平台 (gitee.com)</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/28/EDIF/" rel="prev" title="EDIF">
+                  <i class="fa fa-chevron-left"></i> EDIF
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/11/01/%E5%9F%BA%E7%A1%80%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/" rel="next" title="基础电子元器件">
+                  基础电子元器件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yanlw</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://gitee.com/yanlwsometing" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
